@@ -2,7 +2,52 @@
 	<head>
 		<title>Maps Test</title>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-		<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() ?>/map.js"></script>
+		<script type="text/javascript">
+		
+		var infowindow = new google.maps.InfoWindow();
+		var pinkmarker = new google.maps.MarkerImage('/wp-content/themes/mapdemo/pink_Marker.png', new google.maps.Size(20, 34) );
+		var shadow = new google.maps.MarkerImage('/wp-content/themes/mapdemo/shadow.png', new google.maps.Size(37, 34) );
+
+		function initialize() {
+
+			<?php
+
+			$the_query = new WP_Query('showposts=1');
+
+			while ( $the_query->have_posts() ) : $the_query->the_post();
+				$coordinates = get_geocode_latlng($post->ID);
+			endwhile;
+
+			?>
+
+
+			map = new google.maps.Map(document.getElementById('map'), { 
+				zoom: 12, 
+				center: new google.maps.LatLng<?php echo $coordinates ?>,
+				mapTypeId: google.maps.MapTypeId.ROADMAP 
+			});
+
+			for (var i = 0; i < locations.length; i++) {  
+				var marker = new google.maps.Marker({
+			    	position: locations[i].latlng,
+					icon: pinkmarker,
+					shadow: shadow,
+					map: map
+				});
+				google.maps.event.addListener(marker, 'click', (function(marker, i) {
+				  return function() {
+				    infowindow.setContent(locations[i].info);
+				    infowindow.open(map, marker);
+				  }
+				})(marker, i));
+			}
+
+		}
+		
+		</script>
+
+
+
 
 		<?php wp_head(); ?>
 	</head>
