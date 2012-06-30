@@ -1,5 +1,4 @@
 var infowindow = new google.maps.InfoWindow();
-var pinkmarker = new google.maps.MarkerImage('/wp-content/themes/mapdemo/pink_Marker.png', new google.maps.Size(20, 34) );
 var shadow = new google.maps.MarkerImage('/wp-content/themes/mapdemo/shadow.png', new google.maps.Size(37, 34) );
 
 function initialize() {
@@ -12,7 +11,7 @@ function initialize() {
 	for (var i = 0; i < locations.length; i++) {  
 		var marker = new google.maps.Marker({
 	    	position: locations[i].latlng,
-			icon: pinkmarker,
+			icon: locations[i].marker,
 			shadow: shadow,
 			map: map
 		});
