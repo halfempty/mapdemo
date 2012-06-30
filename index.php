@@ -29,7 +29,14 @@
 						<?php if ( get_post_meta($post->ID, 'latlng', true) !== '' ) : ?>
 							{
 								latlng : new google.maps.LatLng<?php echo get_post_meta($post->ID, 'latlng', true); ?>, 
-								info : document.getElementById('item<?php echo $i; ?>')
+								info : document.getElementById('item<?php echo $i; ?>'),
+								<?php if ( has_post_thumbnail() ) { ?>
+									// There is a Featured Image
+									marker : new google.maps.MarkerImage('<?php echo get_thumbnail_path($post->ID); ?>', new google.maps.Size(20, 34) )
+								<?php } else { ?>
+									// No Featured Image, use fallback
+									marker : new google.maps.MarkerImage('<?php echo get_stylesheet_directory_uri() ?>/pink_Marker.png', new google.maps.Size(20, 34) )
+								<?php } ?>
 						},
 						<?php endif; ?>
 					<?php $i++; endwhile; ?>
