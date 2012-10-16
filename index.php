@@ -32,7 +32,7 @@
 								info : document.getElementById('item<?php echo $i; ?>'),
 								<?php if ( has_post_thumbnail() ) { ?>
 									// There is a Featured Image
-									marker : new google.maps.MarkerImage('<?php echo get_thumbnail_path($post->ID); ?>', new google.maps.Size(20, 34) )
+									marker : new google.maps.MarkerImage('<?php echo get_thumbnail_path($post->ID); ?>', null, null, new google.maps.Point(0, 34), new google.maps.Size(20, 34) )
 								<?php } else { ?>
 									// No Featured Image, use fallback
 									marker : new google.maps.MarkerImage('<?php echo get_stylesheet_directory_uri() ?>/pink_Marker.png', new google.maps.Size(20, 34) )

@@ -13,7 +13,8 @@ function initialize() {
 	    	position: locations[i].latlng,
 			icon: locations[i].marker,
 			shadow: shadow,
-			map: map
+			map: map,
+			optimized : false
 		});
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 		  return function() {
