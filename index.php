@@ -14,7 +14,7 @@
 			<div style="display: none;">
 				<?php $i = 1; ?>
 				<?php while ( have_posts() ) : the_post(); ?>
-					<?php if ( get_post_meta($post->ID, 'latlng', true) !== '' ) : ?>
+					<?php if ( get_post_meta($post->ID, 'martygeocoderlatlng', true) !== '' ) : ?>
 						<div id="item<?php echo $i; ?>">
 							<p><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
 							<?php the_content(); ?>
@@ -26,9 +26,9 @@
 			<script type="text/javascript">
 				var locations = [
 					<?php  $i = 1; while ( have_posts() ) : the_post(); ?>
-						<?php if ( get_post_meta($post->ID, 'latlng', true) !== '' ) : ?>
+						<?php if ( get_post_meta($post->ID, 'martygeocoderlatlng', true) !== '' ) : ?>
 							{
-								latlng : new google.maps.LatLng<?php echo get_post_meta($post->ID, 'latlng', true); ?>, 
+								latlng : new google.maps.LatLng<?php echo get_post_meta($post->ID, 'martygeocoderlatlng', true); ?>, 
 								info : document.getElementById('item<?php echo $i; ?>'),
 								<?php if ( has_post_thumbnail() ) { ?>
 									// There is a Featured Image
